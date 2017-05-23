@@ -2,7 +2,7 @@
 
 ## Installation
 
-You need Node JS and a MongoDB. You can use  mLab, explained in the tutorial, or a local MongoDB instance.
+You need Node JS and a MongoDB. You can use  mLab, explained in the tutorial, or a local MongoDB instance. In any case you need to adapt /db.js
 
 Clone the repository.
 ```bash
