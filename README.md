@@ -14,6 +14,6 @@ npm start
 [Following this tutorial](https://hackernoon.com/restful-api-design-with-node-js-26ccf66eab09)
 
 ## Second Task : Explore OneToMany relation
-Just created the models Device and Software. The idea behind it is that a Device host a software.
+The API will have the following concept : a Device hosts at all time a Software. If a User adds a new Device without an explicit Software available on the DB, a default Software will be added.
 
 ## Third Task : Authentication

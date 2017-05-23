@@ -46,6 +46,7 @@ router.delete('/:id', function (req, res) {
   });
 });
 
+// updates a User
 router.put('/:id', function (req, res) {
   User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, user) {
       if (err) return res.status(500).send("There was a problem updating the user.");
