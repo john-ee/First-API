@@ -21,10 +21,12 @@ Software.findOne({ name: 'Blank'}, function (err, software) {
 
 // returns all Devices
 router.get('/', function (req, res) {
-  Device.find({}, function (err, devices) {
-    if (err) return res.status(500).send("There was a problem finding the devices.");
-    res.status(200).send(devices);
-  });
+  Device
+    .find({}, function (err, devices) {
+      if (err) return res.status(500).send("There was a problem finding the devices.");
+      res.status(200).send(devices);
+    })
+    .populate('software');
 });
 
 // ********************** Private Routes **********************

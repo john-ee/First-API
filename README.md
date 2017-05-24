@@ -25,4 +25,4 @@ The API will have the following concept : a Device hosts at all time a Software.
 
 I followed [this tutorial](https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens)
 
-A non authenticated user can access the list of Devices and Softwares, but only an authenticated user can add or modify the data, as well as access to user routes. The main problem with the current implementation is the middleware method, which is repeated on each controllers.
+A non authenticated user can access the list of Devices and Softwares, but only an authenticated user can add or modify the data, as well as access to user routes. I have a concern with the current implementation on the middleware method, which is repeated on each controllers.
