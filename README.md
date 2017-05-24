@@ -18,6 +18,11 @@ npm start
 [Following this tutorial](https://hackernoon.com/restful-api-design-with-node-js-26ccf66eab09)
 
 ## Second Task : Explore OneToMany relation (done)
+
 The API will have the following concept : a Device hosts at all time a Software. If a User adds a new Device without an explicit Software available on the DB, a default Software will be added.
 
 ## Third Task : Authentication
+
+I followed [this tutorial](https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens)
+
+A non authenticated user can access the list of Devices and Softwares, but only an authenticated user can add or modify the data, as well as access to user routes. The main problem with the current implementation is the middleware method, which is repeated on each controllers.

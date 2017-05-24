@@ -1,3 +1,4 @@
+var jwt = require('jsonwebtoken');
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
@@ -13,6 +14,37 @@ Software.findOne({ name: 'Blank'}, function (err, software) {
   if (!software) console.log('Blank not in DB.');
   console.log(software._id + ' ' + software.name + ' ' + software.description);
   Blank = software;
+});
+
+
+// ********************** Public Routes **********************
+
+// returns all Devices
+router.get('/', function (req, res) {
+  Device.find({}, function (err, devices) {
+    if (err) return res.status(500).send("There was a problem finding the devices.");
+    res.status(200).send(devices);
+  });
+});
+
+// ********************** Private Routes **********************
+
+// route middleware to verify a token
+router.use(function(req, res, next) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if (token) {
+    jwt.verify(token, 'secret', function(err, decoded) {
+      if (err) {
+        res.status(400).send("Failed to authenticate token.");
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else {
+    //there is no token
+    return res.status(403).send("No token provided");
+  }
 });
 
 router.post('/', function (req, res) {
@@ -38,14 +70,6 @@ router.post('/', function (req, res) {
         return res.status(500).send("There was a problem adding the info to the database");
       }
       res.status(200).send(device);
-  });
-});
-
-// returns all Devices
-router.get('/', function (req, res) {
-  Device.find({}, function (err, devices) {
-    if (err) return res.status(500).send("There was a problem finding the devices.");
-    res.status(200).send(devices);
   });
 });
 
