@@ -27,9 +27,18 @@ router.get('/', function (req, res) {
   });
 });
 
-// get a single Software
+// get a single Software by id
 router.get('/:id', function (req,res) {
   Software.findById(req.params.id, function (err, software) {
+    if (err) return res.status(500).send("There was a problem finding the Software.");
+    if (!software) return res.status(404).send("No Software found");
+    res.status(200).send(software);
+  });
+});
+
+// get a single Software by name
+router.get('/byName/:name', function (req,res) {
+  Software.find({ name: req.params.name }, function (err, software) {
     if (err) return res.status(500).send("There was a problem finding the Software.");
     if (!software) return res.status(404).send("No Software found");
     res.status(200).send(software);
