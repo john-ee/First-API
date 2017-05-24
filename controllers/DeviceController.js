@@ -29,6 +29,28 @@ router.get('/', function (req, res) {
     .populate('software');
 });
 
+// get a single Device by id
+router.get('/:id', function (req,res) {
+  Device
+    .findById(req.params.id, function (err, device) {
+      if (err) return res.status(500).send("There was a problem finding the device.");
+      if (!device) return res.status(404).send("No Device found");
+      res.status(200).send(device);
+    })
+    .populate('software');
+});
+
+// get a single Device by name
+router.get('/byName/:name', function (req,res) {
+  Device
+    .find({ name: req.params.name }, function (err, device) {
+      if (err) return res.status(500).send("There was a problem finding the Device.");
+      if (!device) return res.status(404).send("No Device found");
+      res.status(200).send(device);
+    })
+    .populate('software');
+});
+
 // ********************** Private Routes **********************
 
 // route middleware to verify a token
@@ -73,6 +95,42 @@ router.post('/', function (req, res) {
       }
       res.status(200).send(device);
   });
+});
+
+// delete a Device
+router.delete('/:id', function (req, res) {
+  Device.findByIdAndRemove(req.params.id, function(err, device) {
+    if (err) return res.status(500).send("There was aproblem deleting the device.");
+    if (!device) return res.status(404).send("The Software didnt exist.");
+    res.status(200).send("Device " + device.name + " was deleted.");
+  });
+});
+
+// updates a Device
+router.put('/:id', function (req, res) {
+  Device.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, device) {
+      if (err) return res.status(500).send("There was a problem updating the device.");
+      res.status(200).send(device);
+  });
+});
+
+router.put('/:id/software/:name', function (req, res) {
+  if (!req.params.name) {
+    software_id = Blank._id;
+    console.log('Using blank soft ' + Blank._id);
+  }
+  else {
+    Software.findOne({ name: req.params.name}, function (err, software) {
+      if (err || !software) software_id = Blank._id;
+      else software_id = software._id;
+      console.log('Soft id ' + software_id);
+    });
+  }
+  Device
+    .findOneAndUpdate({_id: req.params.id}, { software: software_id }, function (err, device) {
+      if (err) return res.status(500).send("There was a problem updating the device.");
+      res.status(200).send(device);
+    });
 });
 
 module.exports = router;

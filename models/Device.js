@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var DeviceSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, unique: true },
   MACaddress: String,
   software : { type: mongoose.Schema.Types.ObjectId, ref: 'Software' }
 });
