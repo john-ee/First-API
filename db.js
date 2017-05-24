@@ -1,5 +1,7 @@
+var strings = require('./strings');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://root:password@ds149431.mlab.com:49431/jnapi')
+console.log(strings.mongoDBuri);
+mongoose.connect(strings.mongoDBuri);
 //mongoose.connect('mongodb://localhost/test') // Not working
 var conn = mongoose.connection;
 
