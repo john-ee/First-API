@@ -3,8 +3,8 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({ extended: true}));
-var Device = require('./Device');
-var Software = require('../software/Software');
+var Device = require('../models/Device');
+var Software = require('../models/Software');
 
 var software_id;
 var Blank;

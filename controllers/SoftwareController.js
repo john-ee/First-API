@@ -3,7 +3,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({ extended: true}));
-var Software = require('./Software');
+var Software = require('../models/Software');
 
 // creates a new Software
 router.post('/', function (req,res) {
