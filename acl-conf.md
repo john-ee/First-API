@@ -10,20 +10,27 @@ password_file <path>
 ```
 
 Then create the acl_file :
-```
+```bash
 #all users can read & write in topics with the form <project_name>/<username>/?
 pattern readwrite +/%u/#
 
-# the user "api" has access to all topics
+#the user "api" has access to all topics
 user api
 topic readwrite #
 ```
 
-Finally create the password_file
-```
+Next step create the password_file
+```bash
+#For each user :
 <username>:<password>
 ```
-And type the command
+And type bash the command to crypt the passwords
 ```
 mosquitto_passwd -U <password_file>
+```
+
+
+Finally restart mosquitto
+```bash
+sudo systemctl restart mosquitto
 ```
