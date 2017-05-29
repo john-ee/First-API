@@ -3,10 +3,10 @@
 Edit ```/etc/mosquitto/mosquitto.conf```
 
 Add the following :
-```
+```bash
 allow_anonymous false
-acl_file <path>
-password_file <path>
+acl_file <acl_file_path>
+password_file <password_file_path>
 ```
 
 Then create the acl_file :
