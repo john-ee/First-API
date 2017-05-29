@@ -25,7 +25,7 @@ Next step create the password_file
 <username>:<password>
 ```
 And type bash the command to crypt the passwords
-```
+```bash
 mosquitto_passwd -U <password_file>
 ```
 
